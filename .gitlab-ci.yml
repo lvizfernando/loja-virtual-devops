@@ -1,7 +1,7 @@
 image:  mcr.microsoft.com/java/maven:8-zulu-debian9
 
-deploy:
-  stage: deploy
+package:
+  stage: package
   script:
     - mvn clean package
   only:
