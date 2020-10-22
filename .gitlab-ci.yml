@@ -30,8 +30,8 @@ docker-build:
   stage: package
   image: docker:latest
   script:
-  - docker build -t aurimrv/tomcat-img ./docker-img/web
+  - docker build -t aurimrv/tomcat-server-img ./docker-img/web
   - echo $DOCKER_TOKEN | docker login --username $DOCKER_ID --password-stdin
-  - docker push aurimrv/tomcat-img
+  - docker push aurimrv/tomcat-server-img
   only:
     - master
