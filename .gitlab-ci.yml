@@ -19,8 +19,8 @@ maven-build:
 #docker-build:
 #  stage: package
 #  script:
-#  - docker build -t registry.gitlab.com/aurimrv/tomcat-img ./web
-#  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-#  - docker push registry.gitlab.com/aurimrv/tomcat-img
+#  - docker build -t aurimrv/tomcat-img ./web
+#  - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
+#  - docker push aurimrv/tomcat-img
 #  only:
 #    - master
