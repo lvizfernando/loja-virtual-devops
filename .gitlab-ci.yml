@@ -1,5 +1,13 @@
 image: tomcat:7.0-jdk8
 
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+    - combined/target/
+
 services:
   - docker:dind
 
