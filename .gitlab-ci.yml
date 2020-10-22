@@ -7,6 +7,7 @@ cache:
   paths:
     - .m2/repository/
     - combined/target/
+    - docker-img/web/ 
 
 services:
   - docker:dind
@@ -19,16 +20,18 @@ stages:
 maven-build:
   image: mcr.microsoft.com/java/maven:8-zulu-debian9
   stage: build
-  script: "mvn package"
+  script: 
+    - mvn package
+    - cp combined/target/devopsnapratica.war docker-img/web/devopsnapratica.war
   artifacts:
     paths:
       - combined/target/*.war 
 
-#docker-build:
-#  stage: package
-#  script:
-#  - docker build -t aurimrv/tomcat-img ./web
-#  - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
-#  - docker push aurimrv/tomcat-img
-#  only:
-#    - master
+docker-build:
+  stage: package
+  script:
+  - docker build -t aurimrv/tomcat-img ./docker-img/web
+  - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
+  - docker push aurimrv/tomcat-img
+  only:
+    - master
