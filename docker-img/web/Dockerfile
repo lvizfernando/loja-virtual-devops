@@ -6,7 +6,6 @@ ADD catalina.sh /usr/local/tomcat/bin/
 ADD .keystore /usr/local/tomcat/conf/
 ADD server.xml /usr/local/tomcat/conf/
 ADD context.xml /usr/local/tomcat/conf/
-ADD sample.war /usr/local/tomcat/webapps/
 ADD devopsnapratica.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
