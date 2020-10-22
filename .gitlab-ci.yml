@@ -20,7 +20,7 @@ stages:
 maven-build:
   stage: build
   script: 
-    - mvn package
+    - mvn clean package
     - cp combined/target/devopsnapratica.war docker-img/web/devopsnapratica.war
   artifacts:
     paths:
