@@ -31,7 +31,7 @@ docker-build:
   image: docker:latest
   script:
   - docker build -t aurimrv/tomcat-img ./docker-img/web
-  - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
+  - echo $DOCKER_TOKEN | docker login --username $DOCKER_ID --password-stdin
   - docker push aurimrv/tomcat-img
   only:
     - master
