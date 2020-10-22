@@ -28,6 +28,7 @@ maven-build:
 
 docker-build:
   stage: package
+  image: docker:latest
   script:
   - docker build -t aurimrv/tomcat-img ./docker-img/web
   - docker login -u $DOCKER_ID -p $DOCKER_TOKEN
