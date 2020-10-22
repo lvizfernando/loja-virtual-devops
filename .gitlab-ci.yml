@@ -1,9 +1,26 @@
-image:  mcr.microsoft.com/java/maven:8-zulu-debian9
+image: tomcat:7.0-jdk8
 
-deploy:
-  stage: deploy
-  script:
-    - mvn clean package
-  only:
-    - master
+services:
+  - docker:dind
 
+stages:
+  - build
+  - package
+  - deploy
+
+maven-build:
+  image: mcr.microsoft.com/java/maven:8-zulu-debian9
+  stage: build
+  script: "mvn package"
+  artifacts:
+    paths:
+      - combined/target/*.jar 
+
+#docker-build:
+#  stage: package
+#  script:
+#  - docker build -t registry.gitlab.com/aurimrv/tomcat-img ./web
+#  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+#  - docker push registry.gitlab.com/aurimrv/tomcat-img
+#  only:
+#    - master
