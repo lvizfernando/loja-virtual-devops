@@ -9,18 +9,6 @@ stages:
   - deploy
 
 maven-build:
-  cache:
-    paths:
-      - .m2/
-
-  before_script:
-    - echo '<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-                              https://maven.apache.org/xsd/settings-1.0.0.xsd">
-                  <localRepository>'$PWD'.m2</localRepository>
-            </settings>' > $HOME/.m2/settings.xml
-
   image: mcr.microsoft.com/java/maven:8-zulu-debian9
   stage: build
   script: "mvn package"
