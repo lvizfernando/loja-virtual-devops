@@ -14,7 +14,7 @@ maven-build:
   script: "mvn package"
   artifacts:
     paths:
-      - combined/target/*.jar 
+      - combined/target/*.war 
 
 #docker-build:
 #  stage: package
