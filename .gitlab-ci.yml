@@ -8,8 +8,7 @@ stages:
 maven-build:
   stage: build
   script: 
-    - mvn clean compile
-    - mvn test-compile
+    - mvn clean compile test-compile
 
 maven-test:
   stage: test
