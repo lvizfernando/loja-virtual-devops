@@ -1,6 +1,21 @@
 image: mcr.microsoft.com/java/maven:8-zulu-debian9
 
+stages:
+  - build
+  - test
+  - package
+
+maven-build:
+  stage: build
+  script: 
+    - mvn clean compile test-compile
+
+maven-test:
+  stage: test
+  script: 
+    - mvn test
+
 maven-package:
-  stage: deploy
-  script:
-    - mvn clean package
+  stage: package
+  script: 
+    - mvn package
