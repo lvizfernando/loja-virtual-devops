@@ -1,61 +1,6 @@
 image: mcr.microsoft.com/java/maven:8-zulu-debian9
 
-variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-
-cache:
-  paths:
-    - .m2/repository/
-    - combined/target/
-    - docker-img/web/ 
-
-services:
-  - docker:dind
-
-stages:
-  - build
-  - test
-  - package
-  - deploy
-
-maven-build:
-  stage: build
-  script: 
-    - mvn clean compile test-compile
-
-maven-test:
-  stage: test
-  script: 
-    - mvn test
-  artifacts:
-    reports:
-      junit:
-        - core/target/surefire-reports/TEST-*.xml
-        - core/target/failsafe-reports/TEST-*.xml
-        - admin/target/surefire-reports/TEST-*.xml
-        - admin/target/failsafe-reports/TEST-*.xml
-        - site/target/surefire-reports/TEST-*.xml
-        - site/target/failsafe-reports/TEST-*.xml
-        - combined/target/surefire-reports/TEST-*.xml
-        - combined/target/failsafe-reports/TEST-*.xml
-
 maven-package:
-  stage: package
-  script: 
-    - mvn package
-    - cp combined/target/devopsnapratica.war docker-img/web/devopsnapratica.war
-  artifacts:
-    paths:
-      - combined/target/devopsnapratica.war 
-  only:
-    - master
-    
-docker-deploy:
   stage: deploy
-  image: docker:latest
   script:
-  - docker build -t $DOCKER_ID/tomcat-server-img ./docker-img/web
-  - echo $DOCKER_TOKEN | docker login --username $DOCKER_ID --password-stdin
-  - docker push $DOCKER_ID/tomcat-server-img
-  only:
-    - master
+    - mvn clean package
