@@ -37,10 +37,27 @@
         <dependency>
             <groupId>org.broadleafcommerce</groupId>
             <artifactId>broadleaf-framework</artifactId>
+            <exclusions>            
+                <exclusion>
+                    <artifactId>ehcache</artifactId>                
+                    <groupId>net.sf.ehcache</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.broadleafcommerce</groupId>
             <artifactId>broadleaf-profile</artifactId>
+            <exclusions>            
+                <exclusion>
+                    <artifactId>ehcache</artifactId>                
+                    <groupId>net.sf.ehcache</groupId>
+                </exclusion>
+            </exclusions>            
         </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.10.9.2</version>
+        </dependency>        
     </dependencies>
 </project>

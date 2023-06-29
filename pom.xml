@@ -343,6 +343,6 @@
         <module>admin</module>
         <module>core</module>
         <module>site</module>
-            <module>combined</module>
-        </modules>
+        <module>combined</module>
+    </modules>
 </project>
