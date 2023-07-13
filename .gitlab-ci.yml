@@ -19,11 +19,15 @@ stages:
   - deploy
 
 maven-build:
+  tags:
+    - docker
   stage: build
   script: 
     - mvn clean compile test-compile
 
 maven-test:
+  tags:
+    - docker
   stage: test
   script: 
     - mvn test
@@ -40,6 +44,8 @@ maven-test:
         - combined/target/failsafe-reports/TEST-*.xml
 
 maven-package:
+  tags:
+    - docker
   stage: package
   script: 
     - mvn package
@@ -51,6 +57,8 @@ maven-package:
     - master
     
 docker-deploy:
+  tags:
+    - docker
   stage: deploy
   image: docker:latest
   script:
